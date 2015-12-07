@@ -2,11 +2,11 @@ package midsummer.sort.utils;
 
 /**
  * 项目名称：Sort
- * 类描述：
+ * 类描述：工具类
  * 创建人：77.
  * 创建时间：2015/12/6 19:44
  * 修改人：77.
- * 修改时间：2015/12/6 19:44
+ * 修改时间：2015/12/7 19:44
  * 修改备注：
  * QQ：951203598
  */
@@ -59,7 +59,6 @@ public class CharacterParser
 			-10838, -10832, -10815, -10800, -10790, -10780, -10764, -10587, -10544, -10533, -10519, -10331, -10329, -10328, -10322, -10315, -10309,
 			-10307, -10296, -10281, -10274, -10270, -10262, -10260, -10256, -10254};
 	private static CharacterParser characterParser = new CharacterParser();
-	private StringBuilder buffer;
 	private String resource;
 	
 	public static CharacterParser getInstance()
@@ -88,7 +87,7 @@ public class CharacterParser
 	public String getSelling(String chs)
 	{
 		String key, value;
-		buffer = new StringBuilder();
+		StringBuilder buffer = new StringBuilder();
 		for (int i = 0; i < chs.length(); i++)
 		{
 			key = chs.substring(i, i + 1);
@@ -141,7 +140,7 @@ public class CharacterParser
 		try
 		{
 			byte[] bytes = chs.getBytes("gb2312");
-			if (bytes == null || bytes.length > 2 || bytes.length <= 0)
+			if (bytes.length > 2 || bytes.length <= 0)
 			{
 				throw new RuntimeException("illegal resource string");
 			}

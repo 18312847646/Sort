@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity
 	@ViewById
 	TextView dialog;
 	CharacterParser characterParser;
-	private List<String> list = new ArrayList<String>();
+	private List<String> list = new ArrayList<>();
 	private String[] names;
 	private SortAdapter adapter;
 	
@@ -64,8 +64,9 @@ public class MainActivity extends AppCompatActivity
 		
 		// 查询系统中所有的联系人
 		Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-		String name;
+		
 		// cursor转换成数组
+		String name;
 		assert cursor != null;
 		while (cursor.moveToNext())
 		{
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity
 			names = list.toArray(new String[list.size()]);
 		}
 		List<SortModel> data = fillData(names);
+		
 		// 获取到姓名数据
 		Collections.sort(data, new PinyinComparator());
 		adapter = new SortAdapter(this, data);
@@ -87,12 +89,12 @@ public class MainActivity extends AppCompatActivity
 	public List<SortModel> fillData(String[] names)
 	{
 		List<SortModel> sortModels = new ArrayList<>();
-		for (int i = 0; i < names.length; i++)
+		for (String name : names)
 		{
 			SortModel model = new SortModel();
 			// 名字
-			model.setName(names[i]);
-			String pingyin = characterParser.getSelling(names[i]);
+			model.setName(name);
+			String pingyin = characterParser.getSelling(name);
 			// 获取名字拼音的首字母大写
 			String sortLetter = pingyin.substring(0, 1).toUpperCase();
 			model.setSortLetter(sortLetter);
